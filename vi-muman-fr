@@ -1,0 +1,710 @@
+  vi-muman       mini-manuel intéractif pour nouveau utilisateur de vi
+................................................................................
+Afin de vous familiariser avec vi dès MAINTENANT, vous êtes vivement invitè à 
+ouvrir ce fichier avec vi (en  minuscule), en tappant EXACTEMENT la commande 
+suivante à l'invite:    vi -Readonly vi-muman.fr
+Infos: -Readonly (R en majuscule) est l'option de lecture seule qui empèche 
+       toute modification du texte; vi-muman.fr est le nom de ce fichier.
+
+^^^^^^^^^^^^^^^    MEMORISEZ CECI OU ECRIVEZ LE QUELQUEPART!    ^^^^^^^^^^^^^^^^
+
+POUR QUITER vi, appuyez successivement sur ces touches         [Echap] :q [Entrée]
+
+Infos: La touche [Echap] est située au coin supérieur gauche de votre clavier et 
+la touche [Entrée] est la touche de retour à la ligne du clavier. Apres avoir 
+frappé ces touches, dégagez vos doigts de ces touches. Avant de frapper la
+touche [Entrée] vous devez voir apparaitre ceci
+:q
+Cette commande (quit) va apparaitre à la dernière ligne de l'écran. Si, dû à un
+problème quelquonque, un phénomène étrange se produisait, tappez alors
+ [Echap] :q! [Entrée]
+Ceci fait quitter (quit!) l'édition du fichier sans garder les modifications. 
+Vous pourez alors l'ouvrir à nouveau. 
+Et maintenant soyez prudent, ne frappez pas les touches du clavier au hazard.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Pour AVANCER d'une page:  [Ctrl] f  (Gardez appuyé [Ctrl] et frappez f)
+Pour RECULER d'une page:  [Ctrl] b  (f = avant (Forward), b = arrière (Backward)
+
+
+
+
+
+
+
+
+
+
+(suite)
+
+
+
+
+
+
+
+
+
+
+Tres bien!
+
+
+
+Exercices:
+ a - retournez aux pages précédentes et revenez ici.
+ b - quittez ce manuel (vous rappellez-vous comment faire? Sinon: révisez!)
+     et ouvrez à nouveau ce fichier avec vi, sans oublier l'option read-only.
+     Si vous ne vous en rappelez pas alors recommencez depuis le début et
+     mémorisez-le (c'est mieux que par écrit).
+ c - Répétez suffisamant les exercices a et b afin de vous en rappeler.
+
+ATTENTION 1: Il y a plusieurs exercices dans ce manuel. Pour éviter toute 
+             modification de ce fichier, il est recommandé d'utiliser l'option 
+             'readonly' de vi.
+
+ATTENTION 2: Ne pas faire les exercices est encore une plus mauvaise solution.
+
+________________________________________________________________________________
+
+ TABLE DES MATIERES
+________________________________________________________________________________
+ 0  INTRODUCTION
+    0.0 Qu'est ce que vi?
+    0.1 Pourquoi s'initier à vi?
+    0.2 Comment s'initier à vi?
+
+ 1  POUR COMMENCER
+    1.0 Premier pas: MODE COMMANDE et MODE EDITION
+    1.1 Commandes de base
+    1.2 Déplacements
+    1.3 Et maintenant au travail!
+    1.4 Recherche de chaines
+    1.5 Utilisation de set
+
+ 2  INFORMATIONS COMPLEMENTAIRES
+    2.0 Les autres commandes
+    2.1 Substitution de chaines
+    2.2 Ecriture des fichiers
+    2.3 Lire d'autres fichiers
+    2.4 Ouvrir différents fichiers à la fois
+    2.5 Ouvrir un fichier en lecture-seule (read-only mode)
+    2.6 Les commandes du Shell
+    2.7 Donne moi un shell!
+    2.8 Macros
+________________________________________________________________________________
+
+*** 0  INTRODUCTION
+
+
+ -- 0.0 Qu'est ce que vi?
+
+vi (en minuscule) est un éditeur de texte, un logiciel qui vous permet de 
+modifier des fichiers texte.
+
+
+ -- 0.1 Pourquoi s'initier à vi?
+
+Pourquoi devrai-je travailler durement à apprendre à utiliser un éditeur de 
+texte énigmatique et mistérieux tel que vi alors qu'il y en a tant d'autre plus 
+facile à utiliser plus conviviaux?
+Pour plusieurs bonnes raisons:
+ a - vi est le seul éditeur dont vous êtes sûre de le trouver sur TOUTES les 
+     machines UNIX/Linux.
+ b - vi vous permet de manipuler de tres gros fichiers.
+ c - vi est exeptionnellement puissant.
+ d - vi permet de faire des opérations complexes rapidement et efficacement.
+
+
+ -- 0.2 Comment s'initier à vi?
+
+Graduellement. C'est une erreur de vouloir tout apprendre en une seule fois. 
+Vous pouvez faire beaucoup de choses avec vi, mais vous pouvez commencer à 
+travailler avec un nombre tres réduit de commandes.
+
+Vous vous rappélerez mieux d'une commande à une lettre si vous vous rappelez que
+c'est la première lettre d'une terme en anglais.
+
+
+
+*** 1   POUR COMMENCER
+
+
+ -- 1.0 Premier pas: MODE COMMANDE et MODE EDITION
+
+Il est essentiel de comprendre qu'il fonctionne sous deux modes:
+Le mode COMMANDE et le mode EDITION.
+* en mode commande vous pouvez spécifier les commandes que vous voulez que vi 
+  exécute. 
+* en mode édition vous pouvez modifier le texte du fichier que vous éditez.
+
+Q- "Dans les premiers exercices (quitter vi, page suivante, précédente) étais-je
+   en mode commande?"
+R- Oui.
+Q- "Mais pourquoi toutes ces confusions, mode commande, mode édition?"
+R- Parce qu'en dépit des apparences, tout cela va faciliter votre travail, tout
+   spécialement si vous travaillez en mode 'caractère seulement'.
+Q- "Comment puis-je passer du mode commande au mode édition et vice-versa?"
+R- Pour passer du mode édition au mode commande, vous avez tout simplement à 
+   frapper la touche [Echap]. Pour apprendre à revenir en arrière, lisez le
+   chapitre 1.1
+
+
+ -- 1.1 Commandes de base
+
+NOTA 0: généralement parlant, pour saisir une commande, vous devez être en mode
+        commande. Dans le doute frappez la touche [Echap].
+
+Les commandes suivantes vont faire passer du mode commande au mode édition (vous
+allez donc pouvoir insérer du texte).
+
+iTexte  (insert)    Insère la chaîne "Texte" à partir de la position du curceur.
+aTexte  (append)    Ajoute la chaîne "Texte".
+
+oTexte  (open)      Ouvre une nouvelle ligne à la suite et insère le texte
+OTexte  (open)      Ouvre une nouvelle ligne à la ligne précédente et insère le
+                    texte.
+
+NOTA 1: vi fait la différence entre les lettres minuscules et majuscules. 
+NOTA 2: Quand vous avez fini de saisir votre texte, vous devez le spécifier à
+        vi, sinon vous restez en mode insertion indéfiniment.
+
+Q- "Et comment puis-je quitter le mode insertion?"
+R- Frappez la touche [Echap].
+Q- "Cela va-t-il me commuter en mode commande?"
+R- Oui. Il n'y a pas d'autre mode: soit commande, ou édition.
+
+NOTA 3: Les commandes précédées de ":" vont s'afficher sur la dernière ligne en
+        bas et doivent êtres validées avec la touche [Entrée].
+        Les autres commandes n'apparaissent pas.
+
+Les commandes suivantes sont fréquemment utilisées.Vous restez en mode commande:
+J             (join)        Merge la ligne courante avec la suivante.
+x                           Efface le caractère pointé par le curseur.
+u             (undo)        Annule la dernière modification
+.                           ...et la refait.
+
+:w            (write)       Sauve le fichier en cours d'édition.
+:w autrefichier             Sauve le fichier sous le nouveau nom "autrefichier"
+:e autrefichier             Edite le fichier "autrefichier"
+
+:q            (quit)        Quitte; si vous n'avez pas enrégistré les dernières
+                            modification, il va vous demander si vous souhaitez
+                            garder les dernières modifications.
+:q!           (quit!)       Quitte sans sauver les dernières modifications.
+:wq           (write quit)  Sauve et quitte.
+
+:7                          Déplace le curseur au début de la septième ligne.
+G                           Déplace le curseur à la fin du fichier.
+
+dd            (delete)      Supprime la ligne courante.
+
+Exercices:
+ a - Déplassez vous à la ligne 99, puis à la ligne 199.
+ b - Déplassez vous à la fin du fichier en utilisant la commande G, puis
+     retournez à la ligne 199.
+ c - Vous pouvez trouver des nouveaux exercices à la fin du chapitre 1.3, mais
+     il vaut mieux le lire avant.
+
+
+ -- 1.2 Déplacements
+
+Q- "Comment puis-je écrire du texte là ou je le souhaite?"
+R- En déplassant le curseur à l'écran. Les touches à utiliser en mode commande 
+   sont:
+
+h          Déplace le curseur un caractère à gauche.
+j          ...en bas.
+k          ...en haut.
+l          ...à droite.
+
+Essayez par vous même. Si vous utilisez ces commandes en mode édition, vous
+allez voir votre fichier se remplir de lettres hhjjjjjkkkllll...
+
+Q- "Mais je ne vais jamais me rappeler de toutes ces commandes!"
+R- Relaxe. Je pense que vous allez être tenté d'utiliser les touches du clavier
+   numérique (ça marche peut-être, dieu seul le sait!).
+   Je veux vous dire pourquoi ce n'est pas une bonne idée. Les touches de
+   direction du clavier numérique ne fonctionnent pas toujours.
+Q- "Bien, je vais les noter..."
+R- Attendez un moment. Remarquez que les touches hjkl sont alignées sur le
+   clavier.
+   De plus, "j" a une jambe vers le bas qui peut vous aider à vous rappeler sa
+   fonction. "k" a une aille vers le haut. Finallement "h" est la lettre la plus
+   à gauche et "l" la lus à droite.
+
+Pour se déplacer rapidement il y a d'autres commandes:
+w             (word)    Déplace le curseur au début du mot suivant.
+b         (backward)    Déplace le curseur au début du mot précédent.
+e              (end)    Déplace le curseur à la fin du mot suivant.
+
+Exercices:
+ a - Testez toutes les touches suivantes: w, b, e, h, j, k, l
+
+
+ -- 1.3 Et maintenant au travail!
+
+Maintenant, commençons à jouer avec vi!
+Gardez toujours en mémoire dans quel mode vous êtes: dans le doute, tappez la touche [Echap] afin de repasser en mode commande.
+
+Exercices:
+ a - Sauvez le contenu de ce fichier sous le nouveau nom "afac.txt".
+ b - Sauvez le aussi sous le nom "poubelle.txt".
+ c - Editez le fichier "afac.txt" après avoir quité "poubelle.txt". A l'invite, 
+     tappez la commande 
+        vi afac.txt
+     Maintenant que vous n'utilisez plus l'option '-Readonly', vous avez tous
+     les pouvoirs sur "afac.txt". Vous pouvez faire des dégats avec les
+     exercices suivants.
+ d - Créez des nouvelles lignes (avant/après le curseur).
+ e - Ajoutez du texte avec les commandes 'a' et 'i'. Constatez alors la
+     différence.
+ f - Que se passe t-il si, en mode édition, vous frappez la touche [Entrée]?
+ g - Sauvez le fichier "afac.txt".
+ h - Déplacez le curseur en utilisant les touches h, j, k, l. Remarquez que vous
+     ne pouvez les utiliser uniquement en mode commande. Pensez à la touche
+     [Echap].
+ i - Editez le fichier "poubelle.txt" SANS quitter afac.txt. Utilisez alors la
+     commande :e poubelle.txt
+     et détruisez-le avec les expériences suivantes.
+ j - Mergez deux lignes en une.
+ k - Supposons que vous n'avez pas mergé les bonnes, alors annulez la
+     modification.
+ l - Que se passe-t-il si vous annulez à nouveau la modification?
+ m - Supprimez des caractères.
+ n - Ajoutez deux nouvelles lignes de texte.
+ o - Refaites l'exercice 'n', en utilisant la commande '.'.
+ p - Supprimez des lignes en utilisant la commande "dd".
+ q - Répétez les exercices précédents sur les deux fichiers jusqu'a une bonne 
+     utilisation de toutes les commandes.
+
+
+Bien, En ce qui concerne la création de nouveau fichier.
+Passez dans une autre fenêtre et à l'invite (si vous le pouvez, sinon quittez le premier fichier) tappez:
+
+vi filename
+
+Bien que se soit possible, c'est une mauvaise idée d'éditer le même fichier en deux endroits différents. Donc le nom du fichier devra être différent.
+
+Remarquez que vous N'AVEZ PAS ouvert le fichier avec l'option '-Readonly'.
+Si le fichier existait jusqu'a maintenant et que vous ne lui faites pas plus attention, vous risquez de le détruire avec votre expérience.
+Si le fichier est nouveau ou de petite taille vous allez remarquer...
+
+Q- "Que sont tous ces signes au début de chaque ligne que j'ai déja vu quelque
+   part?"
+R-  ...exactement, ce sont des 'tildes', et marquent la fin de votre fichier.
+   Vous les avez vu à la fin de ce fichier aussi. Si votre fichier est vide, vous ne voyez qu'eux. Voici ce que ça donne::
+~
+~
+~
+~
+
+
+Exercices:
+ a - Répétez, à votre guise, quelques-uns des exerciece a-q du chapitre
+     précédent, en particulier:
+ b - Insérez du texte.
+ c - Par la même occasion, utilisez les commandes: h, j, k, l sur les
+     caractères "~", ( je ne parle pas des 4 "~" précédents mais ceux en fin de
+     fichier).
+
+
+ -- 1.4 Recherche de chaines
+
+Pour rechercher vers le bas du fichier la chaine "par exemple", tappez la
+commande:
+/par exemple
+
+Cette commande apparaît sur la dernière ligne en bas de l'écran. Si ce n'est pas le cas, c'est que vous n'êtes pas en mode commande (tappez dans ce cas la touche [Echap] et tappez à nouveau la commande).
+
+Pour trouver l'occurrence suivant, tappez la commande suivante:
+n      (next)
+
+Pour trouver la précédente tappez la commnade:
+N
+
+Pour directement rechercher une chaine vers le début du fichier, tappez la commande suivante:
+?par exemple
+
+et la signification de n et N est alors inversée.
+
+Exercices:
+ a - Recherchez toutes les chaines "par exemple" du document en utilisant la
+     commande '/' puis 'n' et 'N' pour les suivantes et précédentes.
+ b - Répétez l'exercice "a" en utilisant '?', 'n' et 'N'.
+
+Vous allez remarquer que tapper
+/PAR EXEMPLE
+
+ou
+/par eXemple
+
+n'est pas la même chose que
+/par exemple
+
+Cette caractéristique de vi, vient du fait que le système UNIX fait la
+différence entre les minuscules et les majuscules. Ceci peut paraître ennuyeux
+au premier abord, mais il peut être tres utile.
+
+Essayez de tapper maintenant
+/par e.emple
+
+Remarquez qu'il va trouver soit "par exemple" ou "par eXemple", mais pas 
+"PAR EXEMPLE".
+
+Le point en recherche indique un caractère indéfini.
+
+Q- "Et si je veux rechercher exactement la chaine "par e.emple"?"
+R- Essayez alors
+/par e\.emple
+
+En général, il y a quelques caractères spéciaux interprétés différemment par vi. Pour que vi interprète ces caractères comme des caractères normaux, il faut
+simplement le précéder du caractère"\".
+
+Par exemple: le caractère astérisque"*" est aussi un caractère spécial. Pour rechercher le début de chaque paragraphe, marqué par "***", vous devez tapper:
+/\*\*\*
+
+Q- "Que se passe t-il si à cause de ma paresse, je tappe seulement ce qui suit?"
+/\*\*
+R- Essayez. Comme vous pouvez le voir la paresse est punie. Mais étant paresseux moi même, je vous invite à tapper ce qui suit:
+/\*\* 
+
+Q- "Mais c'est pareil!"
+R- Non, un blanc a été ajouté après le dernier astérisque.
+   Essayez-le (pour revenir ici, cherchez "pareil").
+   Avec vi, vous pouvez voir les caractères cachés. Si ceci vous intéresse,
+   recherchez la chaine "Utilisation de set".
+
+Q- " \ est-il aussi un caractère spécial?"
+R- Oui. Essayez de chercher la chaine "par e\.emple". Avant de tomber malade,
+   tappez plutôt ceci:
+/par e\\\.emple
+
+'/' est aussi un caractère spécial: pour le rechercher, vous devez tapper:
+/\/
+
+
+Exercices:
+ a - Recherchez les chaines "\*\*\*" et "par e\\\.emple".
+ b - Trouvez le début de chaque paragraphe marqué par la chaine "--", mais SANS
+     cet exercice. "-" est-il un caractère spécial?
+ c - Recherchez la chaine "--" de l'exercice précédent SANS accepter ni les
+     paragraphes, ni la chaine inclue dans les exercices.
+     L'apostrophe"'" est il un caractère spécial? Et le guillemet"""?
+ d - Que se passe t-il si je fais les recherches suivantes?
+/... .X.....
+/... .X
+/.....X
+     La dernière recherche est elle réellement différente des autres?
+ e - Recherchez la chaine "../images" sans accepter "./dossier/images"
+.
+
+ -- 1.5 Utilisation de set
+
+Pour voir les caractères cachés essayez(en mode commande!) la commande suivante:
+:set list
+
+Le caractère "$" spécifie la fin de la ligne et révèle les éventuels espaces
+(comme par exemple à la fin de cette ligne). 
+Pour ne plus voir les "$" en fin de ligne, tappez:
+:set nolist
+
+Pour voir/[cacher] les numéros de lignes
+:set number
+:set nonumber
+
+Pour voir/[cacher] le mode courant(commande/édition) en bas à droite.
+:set showmode
+:set noshowmode
+
+Mais comme vi peut être ennuyeux par certains noms de commandes longs, il a
+aussi des commandes plus synthétiques:
+:set li
+:set noli
+:set nu
+:set nonu
+:set smd
+:set nosmd
+
+Exercices:
+ a - Testez les commandes suivantes:
+:set nu li smd
+:set nu noli smd
+
+
+
+*** 2  INFORMATIONS COMPLEMENTAIRES
+
+
+ -- 2.0  Les autres commandes
+
+Les commandes suivantes ne sont pas réellement vitales. Vous allez les
+apprendres pas à pas, mais vous devez savoir qu'elles existent.
+
+ITexte  (insert)  insère la chaine "Texte" au début de la ligne courante.
+ATexte  (append)  Ajoute la chaine "Texte" à la fin de la ligne courante.
+
+dw       (delete word)   Efface le mot courant, en partant de la position du 
+                         curseur. Vous restez en mode commande.
+cw       (change word)   Remplace le mot courant, en partant de la position du 
+                         curseur. Vous passez en mode édition.
+5dw                      Efface 5 mots.
+5cw                      Remplace 5 mots.
+
+s        (substitute)    Substitute le caractère pointé par le curseur.
+5s                       Substitute 5 caractères en partant du curseur.
+
+x                        Efface le caractère sous le curseur
+5x                       Efface 5 caractères en partant du curseur.
+
+dd       (delete)        Efface la ligne
+5dd                      Efface 5 liges, à partir de la ligne courante.
+:18,22d                  Efface les 5 lignes de la 18me à la 22me inclues.
+D                        Efface la fin de la ligne courante en partant de la
+                         position du curseur.
+
+cc       (change)        Change toute la ligne.
+5cc                      Change 5 lignes, à partir de la ligne courante.
+:18,22c                  Change les 5 lignes de la 18me à la 22me inclues.
+C                        Change le reste de la ligne courante.
+
+ZZ                       Sauve (si le fichier a été modifié) et quitte.
+
+yw       (yank)          Mémorise dans un tampon le mot courant.
+yy                       ...toute la ligne.
+5yy                      ...5 lignes en partant de la ligne courante.
+NOTA: Quand vous copiez (yank) ou effacez quelque chose, ceci finit dans un
+      tampon, pour une utilisation possible en copier/coller.
+
+p        (print)         Affiche la lignes ou les mots contenus dans le tampon.
+
+0                        (zéro) déplace le curseur au début de la ligne.
+$                        Déplace le curseur à la fin de la ligne.
+:$                       Déplace le curseur à la fin du fichier (comme G).
+^                        Déplace le curseur au premier caractère apres un espace
+                         à partir de la position courante du curseur.
+7|                       Déplace le curseur au septième caractère de la ligne.
+
+H              (high)    Déplace le curseur à la première ligne de la page.
+L               (low)    Déplace le curseur à la dernière ligne de la page.
+M            (middle)    Déplace le curseur au milieu de la page.
+
+[Ctrl] u         (up)    Défile une demi-page vers le haut.
+[Ctrl] d       (down)    Défile une demi-page vers le bas.
+[Ctrl] y                 Défile une ligne vers le haut en gardant le curseur à
+                         la même position.
+[Ctrl] e                 Défile une ligne vers le bas en gardant le curseur à
+                         la même position.
+
+[Ctrl] g                 Donne la position du curseur.
+[Ctrl] l                 Ré-affiche la page courante(refresh).
+[Ctrl] h                 Déplace le curseur en arrière en cas de modification.
+                         Vous pouvez aussi l'utiliser en mode édition.
+
+fx             (find)    Recherche le prochain caractère "x" dans la ligne.
+;                        Recherche le suivant.
+,                        Recherche le précédant.
+Fx             (Find)    Recherche le caractère "x" précédant dans la ligne.
+;                        Recherche le précédant.
+,                        Recherche le suivant.
+
+Exercices:
+ a - Vérifiez si les commandes suivantes fonctionnent.
+     Déplacez vous en arrière et recherchez la chaine "Exercices".
+     0, $, :$, ^, 3|, H, L, M
+ b - Testez les commandes
+     [Ctrl] u, [Ctrl] d, [Ctrl] y, [Ctrl] e, [Ctrl] g, [Ctrl] l, [Ctrl] h
+ c - Déplacez le curseur dans la ligne précédante et recherchez tous les "t"
+     en utilisant les commande f et F.
+ d - [Ctrl] h est une commande légérement particulière:
+     d1) En mode édition, vous pouvez l'utiliser pour vous déplacer dans un mot
+         à modifier tout en rstant en mode édition.
+     d2) En mode commande, vous pouvez l'utiliser pour corriger une erreur dans
+         la commande que vous éditez.
+     Vous êtes invité à faire quelques expériences:
+     Vérifier d1): Inscérez un texte et corrigez le avant de retourner en mode
+     commande. Par exemple, vous pouvez tapper le texte "Teste" et le coriger en
+     "Texte" SANS effacer la fin du texte.
+     Vérifier d2): Corriger une commande tel que ':set li' en ':set nu'.
+     Corrigez la commande '/unechaine' en '/une chaine' sans retapper la
+     commande entièrement.
+ e - Les commandes yy, dd, utilisées avec p, sont tres rapides et fréquemment
+     utilisées:
+     Essayez de copier ou déplacer une ou plus d'une ligne de texte quelque
+     part.
+     Placez le curseur sur la première des lignes que vous voulez copier et
+     tappez '3yy' (par exemple). Déplacez le curseur ailleur et tappez 'p' pour
+     copier les 3 lignes qui sont dans le tampon. Pour déplacer 3 lignes,
+     utilisez '3dd', puis 'p'.
+ f - Vous êtes encouragé, si vous ne les apprenez pas maintenant, toutefois de
+     vérifier que ces comandes de modification fonctionnent. Utilsez plutôt pour
+     ces expériences le fichier "afac.txt".
+
+
+ -- 2.1 Substitution de chaines
+
+Pour modifier la chaîne "une chaine" en "deux chaines" vous pouvez utiliser
+plusieurs commandes:
+
+:s/une chaine/deux chaines               S'il-y-a plusieurs fois "une chaine"
+                                         dans le fichier, seulement la première
+                                         est modifiée.
+
+:s/une chaine/deux chaines/g             Remplace toutes les chaines
+                                         "une chaine" dans la ligne courante.
+
+NOTA: Dans la ligne courante /g est optinnel. S'il n'est pas présent, seulement
+      une seule modification est faite.
+
+:1,9s/une chaine/deux chaines/g          Remplace toutes les chaines
+                                         "une chaine" dans les lignes 1 à 9.
+
+:7,$s/une chaine/deux chaines/g          Remplace toutes les chaines
+                                         "une chaine" de la ligne 7 à la fin du
+                                         fichier.
+
+:%s/une chaine/deux chaines/g            Remplace toutes les chaines
+                                         "une chaine" dans le fichier
+
+
+ -- 2.2 Ecriture des fichiers
+
+Vous savez déja que lorsque vous éditez le fichier "premierfichier" avec vi:
+:w                  Sauve les éventuelles modification du fichier
+                    "premierfichier".
+:w autrefichier     Sauve le fichier courant sous le nom "autrefichier".
+
+Vous pouvez faire autre chose aussi:
+:3,9w autrefichier  Sauve les ligne 3 à 9 inclues du fichier courant sous le nom
+                    "autrefichier".
+
+Si le fichier "autrefichier" existe déja:
+:w! autrefichier    Ecrase le fichier "autrefichier"
+:w>>autrefichier    Ajoute le ficier courant à la fin du fichier "autrefichier".
+:3,9w>>autrefichier Ajoute les lignes 3 à 9 du fichier courant à la fin du
+                    fichier "autrefichier".
+:e autrefichier     Edite le fichier "autrefichier".
+
+Exercices:
+ a - En utilisant les précédantes commandes et en partant de ce fichier, créez
+     un nouveau fichier contenant une liste de commandes vi que vous pensez
+     utiliser fréquemment.
+     Suggestion: Numérotez les lignes de ce fichier et référez vous au
+     paragraphe 2.2.
+
+
+ -- 2.3 Lire d'autres fichiers
+
+Si vous avez besoin d'ajouter un fichier à un autre à un endroit précis, vous pouvez utiliser cette commande:
+:r uncertainfichier Ajoute le fichier "uncertainfichier" au fichier courant à la
+                    ligne suivant le curseur.
+
+Exercices:
+ a - Testez si cela est vrai. Vous pouvez utiliser le fichier "poubelle.txt".
+
+
+ -- 2.4 Ouvrir différents fichiers à la fois
+
+Avec vi vous pouvez éditer plusieurs fichiers à la fois, avec:
+vi premierfichier secondfichier troisiemefichier [...]
+
+Vous allez tout d'abord éditer le fichier "premierfichier" et pour passer au
+fichier suivant vous devez tapper la commande suivante:
+:n
+
+(next) va vous faire passer au deuxième ficher et au troisième de la même
+manière.
+Pour revenir au fichier précédant, tappez:
+:N
+
+NOTA: Cette commande est similaire à la recherche de chaîne mais avec ":" en
+      plus.
+
+Q- "Pourquoi éditer plusieurs fichiers à la fois?"
+R- Parce que vous pouverz avoir à faire la même opération sur plusieurs fichiers
+   à la suite (recherche, substitution, ajout...). Avec vi c'est tres facile.
+
+
+ -- 2.5 Ouvrir un fichier en lecture-seule (read-only mode)
+
+Vous savez déja comment utiliser l'option '-Readonly'.
+vi -Readonly fichier
+
+Ceci est la version longue de l'option. Vous pouvez utiliser la version courte:
+vi -R fichier
+
+Avec l'option -R (et -Readonly) vous pouvez ouvrir plusieurs fichiers à la fois:
+vi -R premierfichier secondfichier troisiemefichier [...]
+
+
+ -- 2.6 Les commandes du Shell
+
+Q- "Mais qu'est ce qu'un shell?"
+A - C'est un interpréteur de commandes. Ou votre porte-parole auprés du système.
+
+Avant d'envoyer des commandes au système, vous devez les précéder de ":!". Par
+exemple, si vous utilisez un système UNIX et que vous voullez tapper la commande
+"ls" SANS quitter vi, tappez en mode commande:
+:!ls
+
+Bien entendu, si vous n'utilisez pas un système UNIX, vous devez utiliser les
+commandes de VOTRE système d'exploitation!
+
+Exercices:
+ a - Testez plusieurs commandes de votre système (N'effacez pas ce fichier!) 
+     SANS quitter vi.
+ b - Testez le résultat de la concaténation de commandes(avec "|"), par exemple
+     (sur un système UNIX)
+:!ps -ef | grep vi
+ c - Si votre système UNIX accepte plusieurs commandes à la fois, essayez tout
+     de suite dans vi la commande suivante:
+:!pwd; ls -l; ps -ef | grep vi
+ d - Vous avez fait unne erreur! Vous venez de tapper trop tôt sur la touche
+     [Entrée] et le résultat de la dernière commande vient de disparaitre.
+     Retrouvez le en tappant:
+:!!
+
+Q- "Puis-je utiliser toutes les commandes du shell à partir de vi?"
+R- Oui
+
+
+ -- 2.7 Donne moi un shell!
+
+Pour ouvrir un nouveau shell alors que vous éditez un fichier avec vi, vous pouvez tapper la commande:
+:sh
+
+Pour revenir à vi, fermez le shell (exit ou CTRL+D sous UNIX).
+Comme par magie, le fichier que vous éditiez ré-apparait!
+Essayez le. C'est sans risque.
+
+Q- "Que puis-je faire avec un shell?"
+R- Vous pouvez utiliser toutes les commandes de votre système. Par exemple, vous
+   pouvez éditer un autre fichier en tappant:
+vi unautrefichier
+   Bien entendu maintenant vous pouvez ouvrir un autre shell dans lequel vous 
+   allez pouvoir éditer le fichier "troisiemefichier". Tappez:
+vi troisiemefichier
+   dans lequel vous allez pouvoir ouvrir un autre shell, etc. etc..
+   Mais attention, vous allez finir par ne plus savoir oû vous habitez!
+
+
+ -- 2.8 Macros
+
+Avez vous déja essayé, avec un éditeur courant, d'effacer le dernier caractère
+de chaque ligne? (peut-être en 4000 lignes de code...)
+
+vi le permet rapidement (et encore plus!) en utilisant les macros.
+Malheureusement l'utilisation des macros est au delà du propos de ce manuel.
+Si vous avez un désir irrésistible d'en savoir plus, alors je vous ai
+définitivement convertit à vi et vous pouvez approfondir vos connaissances par
+vous même.
+
+________________________________________________________________________________
+Copyright (C) 1999 - Massimo Pilolli,   Modena - ITALY   maxpilolli@yahoo.com
+                     Stefania Perrucci, Modena - ITALY
+Traduction    2002 - Philippe Corbes,   Mareil en champagne - FRANCE   
+                                        philippe.corbes@laposte.net
+
+This file is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation;
+see the GNU General Public License for more details.
+
